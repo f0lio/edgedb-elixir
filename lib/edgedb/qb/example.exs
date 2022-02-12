@@ -43,10 +43,10 @@ my_string[5]
 my_string[2..5]
 
 # "hello world"[:5]
-my_string[nil..5]
+my_string.slice.(nil, 5)
 
 # "hello world"[2:]
-my_string[2..nil]
+my_string.slice.(2, nil)
 
 my_string = str("hello world")
 start_idx = int64(2)

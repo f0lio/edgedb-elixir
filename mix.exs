@@ -55,11 +55,11 @@ defmodule EdgeDB.MixProject do
   end
 
   defp elixirc_paths(:test) do
-    ["lib", "test/support"]
+    ["lib", "test/support", "qb"]
   end
 
   defp elixirc_paths(_env) do
-    ["lib"]
+    ["lib", "qb"]
   end
 
   defp elixirc_options do
