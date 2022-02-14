@@ -1,4 +1,4 @@
-defmodule EdgeDB.QB.DateTime do
+defmodule QB.Std.DateTime do
   defstruct [:value]
 
   def from_date(%Date{} = date) do
@@ -23,8 +23,8 @@ defmodule EdgeDB.QB.DateTime do
   end
 end
 
-defimpl EdgeDB.QB.Renderer, for: EdgeDB.QB.DateTime do
-  def render(%EdgeDB.QB.DateTime{value: value}) do
+defimpl EdgeDB.QB.Renderer, for: QB.Std.DateTime do
+  def render(%QB.Std.DateTime{value: value}) do
     "<std::datetime>#{EdgeDB.QB.Renderer.render(value)}"
   end
 end

@@ -1,4 +1,4 @@
-import EdgeDB.QB
+import QB
 
 pid = EdgeDB.start_link()
 

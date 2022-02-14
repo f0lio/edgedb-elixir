@@ -1,11 +1,5 @@
 defmodule EdgeDB.QB do
-  alias EdgeDB.QB
-
-  def render(term) do
-    QB.Renderer.render(term)
-  end
-
-  def cast(type, term) do
-    %QB.Cast{type: type, value: term}
+  def enabled? do
+    Application.get_env(:edgedb, :qb, false)
   end
 end

@@ -1,4 +1,4 @@
-defmodule EdgeDB.QB.Str do
+defmodule QB.Std.Str do
   @behaviour Access
 
   defstruct [
@@ -53,8 +53,8 @@ defmodule EdgeDB.QB.Str do
   end
 end
 
-defimpl EdgeDB.QB.Renderer, for: EdgeDB.QB.Str do
-  def render(%EdgeDB.QB.Str{value: value}) do
+defimpl EdgeDB.QB.Renderer, for: QB.Std.Str do
+  def render(%QB.Std.Str{value: value}) do
     EdgeDB.QB.Renderer.render(value)
   end
 end

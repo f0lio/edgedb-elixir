@@ -5,6 +5,10 @@ defmodule EdgeDB.Application do
 
   @impl Application
   def start(_type, _args) do
+    if EdgeDB.QB.enabled?() do
+      EdgeDB.QB.Caches.initialize_caches()
+    end
+
     children = [
       EdgeDB.Borrower
     ]
