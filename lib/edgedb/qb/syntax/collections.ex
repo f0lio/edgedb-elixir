@@ -2,7 +2,7 @@ defmodule EdgeDB.QB.Syntax.Collections do
   import EdgeDB.QB.Runtime
 
   alias EdgeDB.QB.{
-    Cardinality,
+    Utils,
     Proxy
   }
 
@@ -47,7 +47,7 @@ defmodule EdgeDB.QB.Syntax.Collections do
         __kind__: :operator,
         __element__: element,
         __cardinality__:
-          Cardinality.multiply_cardinalities(
+          Utils.Cardinality.multiply_cardinalities(
             expr.__cardinality__,
             index_type_set.____cardinality__
           ),
@@ -82,8 +82,8 @@ defmodule EdgeDB.QB.Syntax.Collections do
         __element__: expr.__element__,
         __cardinality__:
           expr.__cardinality__
-          |> Cardinality.multiply_cardinalities(cardinality1)
-          |> Cardinality.multiply_cardinalities(cardinality2),
+          |> Utils.Cardinality.multiply_cardinalities(cardinality1)
+          |> Utils.Cardinality.multiply_cardinalities(cardinality2),
         __name__: "[]",
         __opkind__: :infix,
         __args__: [expr, [start_type_set, end_type_set]]
@@ -110,7 +110,7 @@ defmodule EdgeDB.QB.Syntax.Collections do
         :tuple ->
           type.__items__
 
-        :namedtuple ->
+        :named_tuple ->
           type.__shape__
 
         _other ->

@@ -25,10 +25,10 @@ defmodule EdgeDB.QB.Syntax.Query do
       if expr.__kind__ in @runnable_expression_kinds do
         expr
       else
-        case Caches.get(Caches.wrapped_expr_cache(), expr) do
+        case Caches.get(:wrapped_expr_cache, expr) do
           nil ->
             select_expr = Select.select(expr)
-            Caches.set(Caches.wrapped_expr_cache(), expr, select_expr)
+            Caches.set(:wrapped_expr_cache, expr, select_expr)
             select_expr
 
 

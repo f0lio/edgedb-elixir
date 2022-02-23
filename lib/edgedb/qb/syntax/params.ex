@@ -35,7 +35,7 @@ defmodule EdgeDB.QB.Syntax.Params do
 
   defp stringify(%{__kind__: :array} = type, value) when is_list(value) do
     if Keyword.keyword?(value) do
-      raise RuntimeError
+      raise RuntimeError, "keyword list can't be encoded as array"
     end
 
     value = Enum.map_join(value, ",", &stringify(type.__element__, &1))
@@ -44,7 +44,9 @@ defmodule EdgeDB.QB.Syntax.Params do
 
   defp stringify(%{__kind__: :tuple} = type, value) when is_tuple(value) do
     if tuple_size(value) != length(type.__items__) do
-      raise RuntimeError
+      raise RuntimeError,
+            "incorrect number of items for tuple, " <>
+              "got: #{tuple_size(value)}, expected: #{length(type.__items__)}"
     end
 
     value =
@@ -62,17 +64,20 @@ defmodule EdgeDB.QB.Syntax.Params do
 
   defp stringify(%{__kind__: :named_tuple} = type, value) when is_list(value) do
     if not Keyword.keyword?(value) do
-      raise RuntimeError
+      raise RuntimeError, "only keyword list can be encoded as named tuple"
     end
 
     if length(value) == length(type.__shape__) do
-      raise RuntimeError
+      raise RuntimeError,
+            "incorrect number of items for named tuple, " <>
+              "got: #{length(value)}, expected: #{length(type.__shape__)}"
     end
 
     value =
       Enum.map_join(value, ",", fn {key, value} ->
         if not Map.has_key?(type.__shape__, key) do
-          raise RuntimeError
+          raise RuntimeError,
+                "unexpted key in named tuple: #{key}, expected keys: #{Map.keys(type.__shape__)}"
         end
 
         "\"#{key}\": #{stringify(type.__shape__[key], value)}"

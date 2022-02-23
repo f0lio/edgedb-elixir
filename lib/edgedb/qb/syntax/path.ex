@@ -4,9 +4,9 @@ defmodule EdgeDB.QB.Syntax.Path do
   alias EdgeDB.QB.Syntax.Collections
 
   alias EdgeDB.QB.{
-    Cardinality,
     Proxy,
-    Caches
+    Caches,
+    Utils
   }
 
   @pointers_key :"@pointers"
@@ -42,7 +42,9 @@ defmodule EdgeDB.QB.Syntax.Path do
              nil <- Map.get(pointers, key) do
           Map.put(pointers, key, %{
             __kind__: :property,
-            target: element,
+            target: fn ->
+              element
+            end,
             cardinality: value.__cardinality__,
             exclusive: false,
             writable: false,
@@ -79,6 +81,36 @@ defmodule EdgeDB.QB.Syntax.Path do
   end
 
   def get_scoped_expr(expr, existing_scopes \\ nil) do
+    scoped_expr = Caches.get(:scoped_expr_cache, expr)
+
+    scoped_expr =
+      if !scoped_expr or (existing_scopes && Caches.contains?(:existing_scopes, scoped_expr)) do
+        uncached? = !scoped_expr
+
+        scoped_expr =
+          to_expression(
+            Map.merge(expr, %{
+              __cardinality__: :one,
+              __scoped_from__: expr
+            })
+          )
+
+        Caches.add(:scope_roots, scoped_expr)
+
+        if uncached? do
+          Caches.set(:scoped_expr_cache, expr, scoped_expr)
+        end
+
+        scoped_expr
+      else
+        scoped_expr
+      end
+
+    if existing_scopes do
+      Caches.add(existing_scopes, scoped_expr)
+    end
+
+    scoped_expr
   end
 
   defp create_is_fn do
@@ -101,7 +133,7 @@ defmodule EdgeDB.QB.Syntax.Path do
       to_expression(%{
         __kind__: :function,
         __element__: expr.__element__,
-        __cardinality__: Cardinality.override_upper_bound(expr.__cardinality__, :one),
+        __cardinality__: Utils.Cardinality.override_upper_bound(expr.__cardinality__, :one),
         __name__: "std::assert_single",
         __args__: [expr],
         __namedargs__: %{}
@@ -137,7 +169,10 @@ defmodule EdgeDB.QB.Syntax.Path do
       __kind__: :operator,
       __element__: expr.__element__,
       __cardinality__:
-        Cardinality.multiply_cardinalities(expr.__cardinality__, path_type_set.__cardinality__),
+        Utils.Cardinality.multiply_cardinalities(
+          expr.__cardinality__,
+          path_type_set.__cardinality__
+        ),
       __name__: "[]",
       __opkind__: :infix,
       __args__: [expr, path_type_set]
@@ -155,7 +190,7 @@ defmodule EdgeDB.QB.Syntax.Path do
         root = %{
           __element__: pointer.target,
           __cardinality__:
-            Cardinality.multiply_cardinalities(target.__cardinality__, pointer.cardinality)
+            Utils.Cardinality.multiply_cardinalities(target.__cardinality__, pointer.cardinality)
         }
 
         parent = %{
@@ -172,7 +207,7 @@ defmodule EdgeDB.QB.Syntax.Path do
 
         scope_root =
           if target.__scope_root__ do
-            Caches.get(Caches.scope_roots(), proxy)
+            Caches.get(:scope_roots, proxy)
           else
             target.__scope_root__
           end
@@ -191,7 +226,7 @@ defmodule EdgeDB.QB.Syntax.Path do
     end
   end
 
-  defp path_leaf(root, parent, exclusive, scope_root) do
+  def path_leaf(root, parent, exclusive, scope_root \\ nil) do
     to_expression(%{
       __kind__: :path_leaf,
       __element__: root.__element__,
@@ -202,7 +237,7 @@ defmodule EdgeDB.QB.Syntax.Path do
     })
   end
 
-  defp path_node(root, parent, exclusive, scope_root) do
+  def path_node(root, parent, exclusive, scope_root \\ nil) do
     to_expression(%{
       __kind__: :path_node,
       __element__: root.__element__,

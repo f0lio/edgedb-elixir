@@ -5,8 +5,8 @@ defmodule EdgeDB.QB.Reflection.Queries.GetTypesQuery do
     id: "00000000-0000-0000-0000-0000000001ff",
     name: "std::number",
     is_abstract: false,
-    kind: :scalar,
-    enum_values: nil,
+    kind: "scalar",
+    enum_values: [],
     material_id: nil,
     bases: []
   }
@@ -19,7 +19,7 @@ defmodule EdgeDB.QB.Reflection.Queries.GetTypesQuery do
     "00000000-0000-0000-0000-000000000107" => @number_type
   }
 
-  @known_object_fields ~w(
+  @known_fields ~w(
     id
     name
     is_abstract
@@ -134,11 +134,14 @@ defmodule EdgeDB.QB.Reflection.Queries.GetTypesQuery do
   ORDER BY .name;
   """
 
-  def execute(pid) do
-    types = EdgeDB.query!(pid, @query)
+  def types_mapping do
+    @types_mapping
+  end
 
-    types
-    |> Utils.to_native(atoms: @known_object_fields)
+  def execute(pid) do
+    pid
+    |> EdgeDB.query!(@query)
+    |> Utils.to_native(atoms: @known_fields)
     |> Enum.map(fn type ->
       map_type(type.kind, type)
     end)
@@ -147,12 +150,10 @@ defmodule EdgeDB.QB.Reflection.Queries.GetTypesQuery do
   end
 
   defp map_type("scalar", type) do
-    case @types_mapping[type.id] do
-      nil ->
-        type
-
-      cast ->
-        Map.put(type, :cast_only_type, cast.id)
+    if cast = @types_mapping[type.id] do
+      Map.put(type, :cast_only_type, cast.id)
+    else
+      type
     end
   end
 
@@ -177,7 +178,7 @@ defmodule EdgeDB.QB.Reflection.Queries.GetTypesQuery do
               raise RuntimeError, "reference to an unknown object type: #{inspect(base)}"
             end
 
-            Map.update(acc, type.id, MapSet.new(), fn set ->
+            Map.update(acc, type.id, MapSet.new([base]), fn set ->
               MapSet.put(set, base)
             end)
           end)

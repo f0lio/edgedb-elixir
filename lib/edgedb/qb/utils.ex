@@ -18,9 +18,13 @@ defmodule EdgeDB.QB.Utils do
           to_string(atom) == field
         end)
 
-      IO.inspect({field, object[field]})
-
       {field, to_native(object[field], opts)}
+    end)
+  end
+
+  def to_native(array, opts) when is_list(array) do
+    Enum.map(array, fn item ->
+      to_native(item, opts)
     end)
   end
 
