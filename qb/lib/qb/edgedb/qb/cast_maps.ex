@@ -38,22 +38,6 @@ defmodule(QB.EdgeDB.QB.CastMaps) do
           end,
           def(
             get_shared_parent_scalar(
-              %{__name__: "default::🚀🚀🚀"} = _a,
-              %{__name__: "default::🚀🚀🚀"} = b
-            )
-          ) do
-            b
-          end,
-          def(
-            get_shared_parent_scalar(
-              %{__name__: "default::مرحبا"} = _a,
-              %{__name__: "default::مرحبا"} = b
-            )
-          ) do
-            b
-          end,
-          def(
-            get_shared_parent_scalar(
               %{__name__: "std::int16"} = _a,
               %{__name__: "std::int16"} = b
             )
@@ -122,14 +106,6 @@ defmodule(QB.EdgeDB.QB.CastMaps) do
             get_shared_parent_scalar(
               %{__name__: "cfg::memory"} = _a,
               %{__name__: "cfg::memory"} = b
-            )
-          ) do
-            b
-          end,
-          def(
-            get_shared_parent_scalar(
-              %{__name__: "default::你好"} = _a,
-              %{__name__: "default::你好"} = b
             )
           ) do
             b

@@ -24,3 +24,7 @@ Current Plan:
 1. rewrite TS query builder on Elixir
 2. refactor
 3. stabilize
+
+Current limitations:
+
+* emoji in generated code (will result to generation error)

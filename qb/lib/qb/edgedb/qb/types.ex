@@ -1421,53 +1421,6 @@ defmodule(QB.EdgeDB.QB.Types) do
           tuple_elements: [],
           union_of: []
         },
-        "c15033c7-91d9-11ec-a8be-6130115c11f7" => %{
-          array_element_id: [],
-          backlink_stubs: [
-            %{
-              id: "625fd0f0-91d9-11ec-a293-4b2dc324d335",
-              is_exclusive: false,
-              kind: "link",
-              name: "<Ł💯",
-              real_cardinality: "Many",
-              target_id: "6c0851d6-8a10-11ec-87e9-c3313f204cf8"
-            }
-          ],
-          backlinks: [
-            %{
-              id: "c155d600-91d9-11ec-be73-e979dac21c79",
-              is_exclusive: false,
-              kind: "link",
-              name: "<Ł💯[is Łukasz]",
-              real_cardinality: "Many",
-              stub: "Ł💯",
-              target_id: "c1547a5c-91d9-11ec-bdcb-0dd51d42fb79"
-            }
-          ],
-          bases: [%{id: "6c0de05d-8a10-11ec-82e8-6fc6431aec91"}],
-          enum_values: [],
-          id: "c15033c7-91d9-11ec-a8be-6130115c11f7",
-          intersection_of: [],
-          is_abstract: false,
-          kind: "object",
-          material_id: [],
-          name: "default::A",
-          pointers: [
-            %{
-              has_default: false,
-              id: "c1640759-91d9-11ec-9c27-cdb51feec726",
-              is_exclusive: false,
-              is_writable: true,
-              kind: "link",
-              name: "s p A m 🤞",
-              pointers: [],
-              real_cardinality: "One",
-              target_id: "c15908ec-91d9-11ec-bc1f-7be915728ec6"
-            }
-          ],
-          tuple_elements: [],
-          union_of: []
-        },
         "6c77bd5a-8a10-11ec-83d6-6321f11c8a2d" => %{
           array_element_id: [],
           backlink_stubs: [],
@@ -1480,22 +1433,6 @@ defmodule(QB.EdgeDB.QB.Types) do
           kind: "scalar",
           material_id: [],
           name: "schema::OperatorKind",
-          pointers: [],
-          tuple_elements: [],
-          union_of: []
-        },
-        "c151834e-91d9-11ec-9ddd-3f4eba72c0ae" => %{
-          array_element_id: [],
-          backlink_stubs: [],
-          backlinks: [],
-          bases: [%{id: "00000000-0000-0000-0000-000000000101"}],
-          enum_values: [],
-          id: "c151834e-91d9-11ec-9ddd-3f4eba72c0ae",
-          intersection_of: [],
-          is_abstract: false,
-          kind: "scalar",
-          material_id: "00000000-0000-0000-0000-000000000101",
-          name: "default::你好",
           pointers: [],
           tuple_elements: [],
           union_of: []
@@ -2890,64 +2827,6 @@ defmodule(QB.EdgeDB.QB.Types) do
           tuple_elements: [],
           union_of: []
         },
-        "c15908ec-91d9-11ec-bc1f-7be915728ec6" => %{
-          array_element_id: [],
-          backlink_stubs: [
-            %{
-              id: "625fd0f0-91d9-11ec-a293-4b2dc324d335",
-              is_exclusive: false,
-              kind: "link",
-              name: "<s p A m 🤞",
-              real_cardinality: "Many",
-              target_id: "6c0851d6-8a10-11ec-87e9-c3313f204cf8"
-            }
-          ],
-          backlinks: [
-            %{
-              id: "c1640759-91d9-11ec-9c27-cdb51feec726",
-              is_exclusive: false,
-              kind: "link",
-              name: "<s p A m 🤞[is A]",
-              real_cardinality: "Many",
-              stub: "s p A m 🤞",
-              target_id: "c15033c7-91d9-11ec-a8be-6130115c11f7"
-            }
-          ],
-          bases: [%{id: "6c0de05d-8a10-11ec-82e8-6fc6431aec91"}],
-          enum_values: [],
-          id: "c15908ec-91d9-11ec-bc1f-7be915728ec6",
-          intersection_of: [],
-          is_abstract: false,
-          kind: "object",
-          material_id: [],
-          name: "default::S p a M",
-          pointers: [
-            %{
-              has_default: false,
-              id: "c15aab8a-91d9-11ec-bd09-73bfe16ae6e0",
-              is_exclusive: false,
-              is_writable: true,
-              kind: "property",
-              name: "🚀",
-              pointers: [],
-              real_cardinality: "One",
-              target_id: "00000000-0000-0000-0000-000000000104"
-            },
-            %{
-              has_default: false,
-              id: "c15b502b-91d9-11ec-a16c-7bc2a081deaf",
-              is_exclusive: false,
-              is_writable: false,
-              kind: "property",
-              name: "c100",
-              pointers: [],
-              real_cardinality: "One",
-              target_id: "00000000-0000-0000-0000-000000000105"
-            }
-          ],
-          tuple_elements: [],
-          union_of: []
-        },
         "6635a1ee-8a10-11ec-8b19-afdb38091631" => %{
           array_element_id: [],
           backlink_stubs: [],
@@ -3189,22 +3068,6 @@ defmodule(QB.EdgeDB.QB.Types) do
           tuple_elements: [],
           union_of: []
         },
-        "c151938f-91d9-11ec-a0b8-19a30ae39783" => %{
-          array_element_id: [],
-          backlink_stubs: [],
-          backlinks: [],
-          bases: [%{id: "c151834e-91d9-11ec-9ddd-3f4eba72c0ae"}],
-          enum_values: [],
-          id: "c151938f-91d9-11ec-a0b8-19a30ae39783",
-          intersection_of: [],
-          is_abstract: false,
-          kind: "scalar",
-          material_id: "00000000-0000-0000-0000-000000000101",
-          name: "default::مرحبا",
-          pointers: [],
-          tuple_elements: [],
-          union_of: []
-        },
         "82ea7b30-73d3-c79c-86fb-b253f194f53e" => %{
           array_element_id: "00000000-0000-0000-0000-00000000010d",
           backlink_stubs: [],
@@ -3365,22 +3228,6 @@ defmodule(QB.EdgeDB.QB.Types) do
               target_id: "05f91774-15ea-9001-038e-092c1cad80af"
             }
           ],
-          tuple_elements: [],
-          union_of: []
-        },
-        "c1532ff4-91d9-11ec-a73f-09eee86c5ef9" => %{
-          array_element_id: [],
-          backlink_stubs: [],
-          backlinks: [],
-          bases: [%{id: "c151938f-91d9-11ec-a0b8-19a30ae39783"}],
-          enum_values: [],
-          id: "c1532ff4-91d9-11ec-a73f-09eee86c5ef9",
-          intersection_of: [],
-          is_abstract: false,
-          kind: "scalar",
-          material_id: "00000000-0000-0000-0000-000000000101",
-          name: "default::🚀🚀🚀",
-          pointers: [],
           tuple_elements: [],
           union_of: []
         },
@@ -4212,33 +4059,6 @@ defmodule(QB.EdgeDB.QB.Types) do
               target_id: "c14a37c5-91d9-11ec-b156-01fed3d58c5f"
             },
             %{
-              id: "c15126e5-91d9-11ec-9a11-e9d970e6eb0d",
-              is_exclusive: false,
-              kind: "link",
-              name: "<__type__[is A]",
-              real_cardinality: "Many",
-              stub: "__type__",
-              target_id: "c15033c7-91d9-11ec-a8be-6130115c11f7"
-            },
-            %{
-              id: "c155718f-91d9-11ec-b61b-3d3ae07096a2",
-              is_exclusive: false,
-              kind: "link",
-              name: "<__type__[is Łukasz]",
-              real_cardinality: "Many",
-              stub: "__type__",
-              target_id: "c1547a5c-91d9-11ec-bdcb-0dd51d42fb79"
-            },
-            %{
-              id: "c15a442e-91d9-11ec-9d2f-af666ebf6709",
-              is_exclusive: false,
-              kind: "link",
-              name: "<__type__[is S p a M]",
-              real_cardinality: "Many",
-              stub: "__type__",
-              target_id: "c15908ec-91d9-11ec-bc1f-7be915728ec6"
-            },
-            %{
               id: "c15d0ef8-91d9-11ec-8f79-ef2d8c77a42c",
               is_exclusive: false,
               kind: "link",
@@ -4583,62 +4403,6 @@ defmodule(QB.EdgeDB.QB.Types) do
           material_id: [],
           name: "cal::local_datetime",
           pointers: [],
-          tuple_elements: [],
-          union_of: []
-        },
-        "c1547a5c-91d9-11ec-bdcb-0dd51d42fb79" => %{
-          array_element_id: [],
-          backlink_stubs: [],
-          backlinks: [],
-          bases: [%{id: "6c0de05d-8a10-11ec-82e8-6fc6431aec91"}],
-          enum_values: [],
-          id: "c1547a5c-91d9-11ec-bdcb-0dd51d42fb79",
-          intersection_of: [],
-          is_abstract: false,
-          kind: "object",
-          material_id: [],
-          name: "default::Łukasz",
-          pointers: [
-            %{
-              has_default: false,
-              id: "c155d600-91d9-11ec-be73-e979dac21c79",
-              is_exclusive: false,
-              is_writable: true,
-              kind: "link",
-              name: "Ł💯",
-              pointers: [
-                %{
-                  id: "c156441a-91d9-11ec-bd0a-7fbaad8efd82",
-                  is_writable: true,
-                  kind: "property",
-                  name: "@🙀مرحبا🙀",
-                  real_cardinality: "AtMostOne",
-                  target_id: "c151938f-91d9-11ec-a0b8-19a30ae39783"
-                },
-                %{
-                  id: "c1585290-91d9-11ec-9ffc-31e9115f654c",
-                  is_writable: true,
-                  kind: "property",
-                  name: "@🙀🚀🚀🚀🙀",
-                  real_cardinality: "AtMostOne",
-                  target_id: "c1532ff4-91d9-11ec-a73f-09eee86c5ef9"
-                }
-              ],
-              real_cardinality: "AtMostOne",
-              target_id: "c15033c7-91d9-11ec-a8be-6130115c11f7"
-            },
-            %{
-              has_default: true,
-              id: "c15891f0-91d9-11ec-ba16-7576629dfae4",
-              is_exclusive: false,
-              is_writable: true,
-              kind: "property",
-              name: "Ł🤞",
-              pointers: [],
-              real_cardinality: "One",
-              target_id: "c1532ff4-91d9-11ec-a73f-09eee86c5ef9"
-            }
-          ],
           tuple_elements: [],
           union_of: []
         },
