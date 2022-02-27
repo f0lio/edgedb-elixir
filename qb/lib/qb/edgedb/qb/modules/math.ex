@@ -1,519 +1,473 @@
 defmodule(QB.EdgeDB.QB.Modules.Math) do
   [
-    [
-      [
-        (
-          @doc "Round up to the nearest integer."
-          def(ceil(x)) do
-            execute_ceil([x])
-          end
-        )
-      ],
-      [
-        (
-          @doc "Round up to the nearest integer."
-          def(ceil(x)) do
-            execute_ceil([x])
-          end
-        )
-      ],
-      [
-        (
-          @doc "Round up to the nearest integer."
-          def(ceil(x)) do
-            execute_ceil([x])
-          end
-        )
-      ],
-      defp(execute_ceil(positional \\ [], named \\ [])) do
-        {return_type, cardinality, args, named_args} =
-          EdgeDB.QB.Syntax.Funcops.resolve_overload(:ceil, positional, named, [
-            %{
-              args: [
-                %{
-                  type_id: "00000000-0000-0000-0000-0000000001ff",
-                  optional: false,
-                  set_of_type: false,
-                  variadic: false
-                }
-              ],
-              named_args: %{},
-              return_type_id: "00000000-0000-0000-0000-0000000001ff",
-              return_typemod: nil,
-              preserves_optionality: false
-            }
-          ])
+    def(ceil(args \\ [])) do
+      %{return_type: return_type, cardinality: cardinality, args: args, named_args: named_args} =
+        EdgeDB.QB.Syntax.Funcops.resolve_overload("math::ceil", args, [
+          %{
+            args: [
+              %{
+                optional: false,
+                set_of_type: false,
+                type_id: "00000000-0000-0000-0000-0000000001ff",
+                variadic: false
+              }
+            ],
+            named_args: %{},
+            preserves_optionality: false,
+            return_type_id: "00000000-0000-0000-0000-0000000001ff",
+            return_typemod: nil
+          },
+          %{
+            args: [
+              %{
+                optional: false,
+                set_of_type: false,
+                type_id: "00000000-0000-0000-0000-000000000110",
+                variadic: false
+              }
+            ],
+            named_args: %{},
+            preserves_optionality: false,
+            return_type_id: "00000000-0000-0000-0000-000000000110",
+            return_typemod: nil
+          },
+          %{
+            args: [
+              %{
+                optional: false,
+                set_of_type: false,
+                type_id: "00000000-0000-0000-0000-000000000108",
+                variadic: false
+              }
+            ],
+            named_args: %{},
+            preserves_optionality: false,
+            return_type_id: "00000000-0000-0000-0000-000000000108",
+            return_typemod: nil
+          }
+        ])
 
-        EdgeDB.QB.Syntax.Path.to_expression(%{
-          __kind__: :function,
-          __element__: return_type,
-          __cardinality__: cardinality,
-          __name__: "math::ceil",
-          __args__: positional,
-          __named_args__: named_args
-        })
-      end
-    ],
-    [
-      [
-        (
-          @doc "Return the population standard deviation of the input set."
-          def(stddev_pop(vals)) do
-            execute_stddev_pop([vals])
-          end
-        )
-      ],
-      [
-        (
-          @doc "Return the population standard deviation of the input set."
-          def(stddev_pop(vals)) do
-            execute_stddev_pop([vals])
-          end
-        )
-      ],
-      defp(execute_stddev_pop(positional \\ [], named \\ [])) do
-        {return_type, cardinality, args, named_args} =
-          EdgeDB.QB.Syntax.Funcops.resolve_overload(:stddev_pop, positional, named, [
-            %{
-              args: [
-                %{
-                  type_id: "00000000-0000-0000-0000-0000000001ff",
-                  optional: false,
-                  set_of_type: true,
-                  variadic: false
-                }
-              ],
-              named_args: %{},
-              return_type_id: "00000000-0000-0000-0000-0000000001ff",
-              return_typemod: nil,
-              preserves_optionality: false
-            }
-          ])
+      EdgeDB.QB.Syntax.Path.to_expression(%{
+        __kind__: :function,
+        __element__: return_type,
+        __cardinality__: cardinality,
+        __name__: :ceil,
+        __args__: args,
+        __named_args__: named_args
+      })
+    end,
+    def(stddev_pop(args \\ [])) do
+      %{return_type: return_type, cardinality: cardinality, args: args, named_args: named_args} =
+        EdgeDB.QB.Syntax.Funcops.resolve_overload("math::stddev_pop", args, [
+          %{
+            args: [
+              %{
+                optional: false,
+                set_of_type: true,
+                type_id: "00000000-0000-0000-0000-0000000001ff",
+                variadic: false
+              }
+            ],
+            named_args: %{},
+            preserves_optionality: false,
+            return_type_id: "00000000-0000-0000-0000-0000000001ff",
+            return_typemod: nil
+          },
+          %{
+            args: [
+              %{
+                optional: false,
+                set_of_type: true,
+                type_id: "00000000-0000-0000-0000-000000000108",
+                variadic: false
+              }
+            ],
+            named_args: %{},
+            preserves_optionality: false,
+            return_type_id: "00000000-0000-0000-0000-000000000108",
+            return_typemod: nil
+          }
+        ])
 
-        EdgeDB.QB.Syntax.Path.to_expression(%{
-          __kind__: :function,
-          __element__: return_type,
-          __cardinality__: cardinality,
-          __name__: "math::stddev_pop",
-          __args__: positional,
-          __named_args__: named_args
-        })
-      end
-    ],
-    [
-      [
-        (
-          @doc "Return the arithmetic mean of the input set."
-          def(mean(vals)) do
-            execute_mean([vals])
-          end
-        )
-      ],
-      [
-        (
-          @doc "Return the arithmetic mean of the input set."
-          def(mean(vals)) do
-            execute_mean([vals])
-          end
-        )
-      ],
-      defp(execute_mean(positional \\ [], named \\ [])) do
-        {return_type, cardinality, args, named_args} =
-          EdgeDB.QB.Syntax.Funcops.resolve_overload(:mean, positional, named, [
-            %{
-              args: [
-                %{
-                  type_id: "00000000-0000-0000-0000-0000000001ff",
-                  optional: false,
-                  set_of_type: true,
-                  variadic: false
-                }
-              ],
-              named_args: %{},
-              return_type_id: "00000000-0000-0000-0000-0000000001ff",
-              return_typemod: nil,
-              preserves_optionality: false
-            }
-          ])
+      EdgeDB.QB.Syntax.Path.to_expression(%{
+        __kind__: :function,
+        __element__: return_type,
+        __cardinality__: cardinality,
+        __name__: :stddev_pop,
+        __args__: args,
+        __named_args__: named_args
+      })
+    end,
+    def(mean(args \\ [])) do
+      %{return_type: return_type, cardinality: cardinality, args: args, named_args: named_args} =
+        EdgeDB.QB.Syntax.Funcops.resolve_overload("math::mean", args, [
+          %{
+            args: [
+              %{
+                optional: false,
+                set_of_type: true,
+                type_id: "00000000-0000-0000-0000-0000000001ff",
+                variadic: false
+              }
+            ],
+            named_args: %{},
+            preserves_optionality: false,
+            return_type_id: "00000000-0000-0000-0000-0000000001ff",
+            return_typemod: nil
+          },
+          %{
+            args: [
+              %{
+                optional: false,
+                set_of_type: true,
+                type_id: "00000000-0000-0000-0000-000000000108",
+                variadic: false
+              }
+            ],
+            named_args: %{},
+            preserves_optionality: false,
+            return_type_id: "00000000-0000-0000-0000-000000000108",
+            return_typemod: nil
+          }
+        ])
 
-        EdgeDB.QB.Syntax.Path.to_expression(%{
-          __kind__: :function,
-          __element__: return_type,
-          __cardinality__: cardinality,
-          __name__: "math::mean",
-          __args__: positional,
-          __named_args__: named_args
-        })
-      end
-    ],
-    [
-      [
-        (
-          @doc "Return the natural logarithm of the input value."
-          def(ln(x)) do
-            execute_ln([x])
-          end
-        )
-      ],
-      [
-        (
-          @doc "Return the natural logarithm of the input value."
-          def(ln(x)) do
-            execute_ln([x])
-          end
-        )
-      ],
-      defp(execute_ln(positional \\ [], named \\ [])) do
-        {return_type, cardinality, args, named_args} =
-          EdgeDB.QB.Syntax.Funcops.resolve_overload(:ln, positional, named, [
-            %{
-              args: [
-                %{
-                  type_id: "00000000-0000-0000-0000-0000000001ff",
-                  optional: false,
-                  set_of_type: false,
-                  variadic: false
-                }
-              ],
-              named_args: %{},
-              return_type_id: "00000000-0000-0000-0000-0000000001ff",
-              return_typemod: nil,
-              preserves_optionality: false
-            }
-          ])
+      EdgeDB.QB.Syntax.Path.to_expression(%{
+        __kind__: :function,
+        __element__: return_type,
+        __cardinality__: cardinality,
+        __name__: :mean,
+        __args__: args,
+        __named_args__: named_args
+      })
+    end,
+    def(ln(args \\ [])) do
+      %{return_type: return_type, cardinality: cardinality, args: args, named_args: named_args} =
+        EdgeDB.QB.Syntax.Funcops.resolve_overload("math::ln", args, [
+          %{
+            args: [
+              %{
+                optional: false,
+                set_of_type: false,
+                type_id: "00000000-0000-0000-0000-0000000001ff",
+                variadic: false
+              }
+            ],
+            named_args: %{},
+            preserves_optionality: false,
+            return_type_id: "00000000-0000-0000-0000-0000000001ff",
+            return_typemod: nil
+          },
+          %{
+            args: [
+              %{
+                optional: false,
+                set_of_type: false,
+                type_id: "00000000-0000-0000-0000-000000000108",
+                variadic: false
+              }
+            ],
+            named_args: %{},
+            preserves_optionality: false,
+            return_type_id: "00000000-0000-0000-0000-000000000108",
+            return_typemod: nil
+          }
+        ])
 
-        EdgeDB.QB.Syntax.Path.to_expression(%{
-          __kind__: :function,
-          __element__: return_type,
-          __cardinality__: cardinality,
-          __name__: "math::ln",
-          __args__: positional,
-          __named_args__: named_args
-        })
-      end
-    ],
-    [
-      [
-        (
-          @doc "Return the sample variance of the input set."
-          def(var(vals)) do
-            execute_var([vals])
-          end
-        )
-      ],
-      [
-        (
-          @doc "Return the sample variance of the input set."
-          def(var(vals)) do
-            execute_var([vals])
-          end
-        )
-      ],
-      defp(execute_var(positional \\ [], named \\ [])) do
-        {return_type, cardinality, args, named_args} =
-          EdgeDB.QB.Syntax.Funcops.resolve_overload(:var, positional, named, [
-            %{
-              args: [
-                %{
-                  type_id: "00000000-0000-0000-0000-0000000001ff",
-                  optional: false,
-                  set_of_type: true,
-                  variadic: false
-                }
-              ],
-              named_args: %{},
-              return_type_id: "00000000-0000-0000-0000-0000000001ff",
-              return_typemod: "OptionalType",
-              preserves_optionality: false
-            }
-          ])
+      EdgeDB.QB.Syntax.Path.to_expression(%{
+        __kind__: :function,
+        __element__: return_type,
+        __cardinality__: cardinality,
+        __name__: :ln,
+        __args__: args,
+        __named_args__: named_args
+      })
+    end,
+    def(var(args \\ [])) do
+      %{return_type: return_type, cardinality: cardinality, args: args, named_args: named_args} =
+        EdgeDB.QB.Syntax.Funcops.resolve_overload("math::var", args, [
+          %{
+            args: [
+              %{
+                optional: false,
+                set_of_type: true,
+                type_id: "00000000-0000-0000-0000-0000000001ff",
+                variadic: false
+              }
+            ],
+            named_args: %{},
+            preserves_optionality: false,
+            return_type_id: "00000000-0000-0000-0000-0000000001ff",
+            return_typemod: "OptionalType"
+          },
+          %{
+            args: [
+              %{
+                optional: false,
+                set_of_type: true,
+                type_id: "00000000-0000-0000-0000-000000000108",
+                variadic: false
+              }
+            ],
+            named_args: %{},
+            preserves_optionality: false,
+            return_type_id: "00000000-0000-0000-0000-000000000108",
+            return_typemod: "OptionalType"
+          }
+        ])
 
-        EdgeDB.QB.Syntax.Path.to_expression(%{
-          __kind__: :function,
-          __element__: return_type,
-          __cardinality__: cardinality,
-          __name__: "math::var",
-          __args__: positional,
-          __named_args__: named_args
-        })
-      end
-    ],
-    [
-      [
-        (
-          @doc "Return the population variance of the input set."
-          def(var_pop(vals)) do
-            execute_var_pop([vals])
-          end
-        )
-      ],
-      [
-        (
-          @doc "Return the population variance of the input set."
-          def(var_pop(vals)) do
-            execute_var_pop([vals])
-          end
-        )
-      ],
-      defp(execute_var_pop(positional \\ [], named \\ [])) do
-        {return_type, cardinality, args, named_args} =
-          EdgeDB.QB.Syntax.Funcops.resolve_overload(:var_pop, positional, named, [
-            %{
-              args: [
-                %{
-                  type_id: "00000000-0000-0000-0000-0000000001ff",
-                  optional: false,
-                  set_of_type: true,
-                  variadic: false
-                }
-              ],
-              named_args: %{},
-              return_type_id: "00000000-0000-0000-0000-0000000001ff",
-              return_typemod: "OptionalType",
-              preserves_optionality: false
-            }
-          ])
+      EdgeDB.QB.Syntax.Path.to_expression(%{
+        __kind__: :function,
+        __element__: return_type,
+        __cardinality__: cardinality,
+        __name__: :var,
+        __args__: args,
+        __named_args__: named_args
+      })
+    end,
+    def(var_pop(args \\ [])) do
+      %{return_type: return_type, cardinality: cardinality, args: args, named_args: named_args} =
+        EdgeDB.QB.Syntax.Funcops.resolve_overload("math::var_pop", args, [
+          %{
+            args: [
+              %{
+                optional: false,
+                set_of_type: true,
+                type_id: "00000000-0000-0000-0000-0000000001ff",
+                variadic: false
+              }
+            ],
+            named_args: %{},
+            preserves_optionality: false,
+            return_type_id: "00000000-0000-0000-0000-0000000001ff",
+            return_typemod: "OptionalType"
+          },
+          %{
+            args: [
+              %{
+                optional: false,
+                set_of_type: true,
+                type_id: "00000000-0000-0000-0000-000000000108",
+                variadic: false
+              }
+            ],
+            named_args: %{},
+            preserves_optionality: false,
+            return_type_id: "00000000-0000-0000-0000-000000000108",
+            return_typemod: "OptionalType"
+          }
+        ])
 
-        EdgeDB.QB.Syntax.Path.to_expression(%{
-          __kind__: :function,
-          __element__: return_type,
-          __cardinality__: cardinality,
-          __name__: "math::var_pop",
-          __args__: positional,
-          __named_args__: named_args
-        })
-      end
-    ],
-    [
-      [
-        (
-          @doc "Return the absolute value of the input *x*."
-          def(abs(x)) do
-            execute_abs([x])
-          end
-        )
-      ],
-      defp(execute_abs(positional \\ [], named \\ [])) do
-        {return_type, cardinality, args, named_args} =
-          EdgeDB.QB.Syntax.Funcops.resolve_overload(:abs, positional, named, [
-            %{
-              args: [
-                %{
-                  type_id: "6635a1ee-8a10-11ec-8b19-afdb38091631",
-                  optional: false,
-                  set_of_type: false,
-                  variadic: false
-                }
-              ],
-              named_args: %{},
-              return_type_id: "6635a1ee-8a10-11ec-8b19-afdb38091631",
-              return_typemod: nil,
-              preserves_optionality: false
-            }
-          ])
+      EdgeDB.QB.Syntax.Path.to_expression(%{
+        __kind__: :function,
+        __element__: return_type,
+        __cardinality__: cardinality,
+        __name__: :var_pop,
+        __args__: args,
+        __named_args__: named_args
+      })
+    end,
+    def(abs(args \\ [])) do
+      %{return_type: return_type, cardinality: cardinality, args: args, named_args: named_args} =
+        EdgeDB.QB.Syntax.Funcops.resolve_overload("math::abs", args, [
+          %{
+            args: [
+              %{
+                optional: false,
+                set_of_type: false,
+                type_id: "6635a1ee-8a10-11ec-8b19-afdb38091631",
+                variadic: false
+              }
+            ],
+            named_args: %{},
+            preserves_optionality: false,
+            return_type_id: "6635a1ee-8a10-11ec-8b19-afdb38091631",
+            return_typemod: nil
+          }
+        ])
 
-        EdgeDB.QB.Syntax.Path.to_expression(%{
-          __kind__: :function,
-          __element__: return_type,
-          __cardinality__: cardinality,
-          __name__: "math::abs",
-          __args__: positional,
-          __named_args__: named_args
-        })
-      end
-    ],
-    [
-      [
-        (
-          @doc "Return the sample standard deviation of the input set."
-          def(stddev(vals)) do
-            execute_stddev([vals])
-          end
-        )
-      ],
-      [
-        (
-          @doc "Return the sample standard deviation of the input set."
-          def(stddev(vals)) do
-            execute_stddev([vals])
-          end
-        )
-      ],
-      defp(execute_stddev(positional \\ [], named \\ [])) do
-        {return_type, cardinality, args, named_args} =
-          EdgeDB.QB.Syntax.Funcops.resolve_overload(:stddev, positional, named, [
-            %{
-              args: [
-                %{
-                  type_id: "00000000-0000-0000-0000-0000000001ff",
-                  optional: false,
-                  set_of_type: true,
-                  variadic: false
-                }
-              ],
-              named_args: %{},
-              return_type_id: "00000000-0000-0000-0000-0000000001ff",
-              return_typemod: nil,
-              preserves_optionality: false
-            }
-          ])
+      EdgeDB.QB.Syntax.Path.to_expression(%{
+        __kind__: :function,
+        __element__: return_type,
+        __cardinality__: cardinality,
+        __name__: :abs,
+        __args__: args,
+        __named_args__: named_args
+      })
+    end,
+    def(stddev(args \\ [])) do
+      %{return_type: return_type, cardinality: cardinality, args: args, named_args: named_args} =
+        EdgeDB.QB.Syntax.Funcops.resolve_overload("math::stddev", args, [
+          %{
+            args: [
+              %{
+                optional: false,
+                set_of_type: true,
+                type_id: "00000000-0000-0000-0000-0000000001ff",
+                variadic: false
+              }
+            ],
+            named_args: %{},
+            preserves_optionality: false,
+            return_type_id: "00000000-0000-0000-0000-0000000001ff",
+            return_typemod: nil
+          },
+          %{
+            args: [
+              %{
+                optional: false,
+                set_of_type: true,
+                type_id: "00000000-0000-0000-0000-000000000108",
+                variadic: false
+              }
+            ],
+            named_args: %{},
+            preserves_optionality: false,
+            return_type_id: "00000000-0000-0000-0000-000000000108",
+            return_typemod: nil
+          }
+        ])
 
-        EdgeDB.QB.Syntax.Path.to_expression(%{
-          __kind__: :function,
-          __element__: return_type,
-          __cardinality__: cardinality,
-          __name__: "math::stddev",
-          __args__: positional,
-          __named_args__: named_args
-        })
-      end
-    ],
-    [
-      [
-        (
-          @doc "Round down to the nearest integer."
-          def(floor(x)) do
-            execute_floor([x])
-          end
-        )
-      ],
-      [
-        (
-          @doc "Round down to the nearest integer."
-          def(floor(x)) do
-            execute_floor([x])
-          end
-        )
-      ],
-      [
-        (
-          @doc "Round down to the nearest integer."
-          def(floor(x)) do
-            execute_floor([x])
-          end
-        )
-      ],
-      defp(execute_floor(positional \\ [], named \\ [])) do
-        {return_type, cardinality, args, named_args} =
-          EdgeDB.QB.Syntax.Funcops.resolve_overload(:floor, positional, named, [
-            %{
-              args: [
-                %{
-                  type_id: "00000000-0000-0000-0000-0000000001ff",
-                  optional: false,
-                  set_of_type: false,
-                  variadic: false
-                }
-              ],
-              named_args: %{},
-              return_type_id: "00000000-0000-0000-0000-0000000001ff",
-              return_typemod: nil,
-              preserves_optionality: false
-            }
-          ])
+      EdgeDB.QB.Syntax.Path.to_expression(%{
+        __kind__: :function,
+        __element__: return_type,
+        __cardinality__: cardinality,
+        __name__: :stddev,
+        __args__: args,
+        __named_args__: named_args
+      })
+    end,
+    def(floor(args \\ [])) do
+      %{return_type: return_type, cardinality: cardinality, args: args, named_args: named_args} =
+        EdgeDB.QB.Syntax.Funcops.resolve_overload("math::floor", args, [
+          %{
+            args: [
+              %{
+                optional: false,
+                set_of_type: false,
+                type_id: "00000000-0000-0000-0000-0000000001ff",
+                variadic: false
+              }
+            ],
+            named_args: %{},
+            preserves_optionality: false,
+            return_type_id: "00000000-0000-0000-0000-0000000001ff",
+            return_typemod: nil
+          },
+          %{
+            args: [
+              %{
+                optional: false,
+                set_of_type: false,
+                type_id: "00000000-0000-0000-0000-000000000110",
+                variadic: false
+              }
+            ],
+            named_args: %{},
+            preserves_optionality: false,
+            return_type_id: "00000000-0000-0000-0000-000000000110",
+            return_typemod: nil
+          },
+          %{
+            args: [
+              %{
+                optional: false,
+                set_of_type: false,
+                type_id: "00000000-0000-0000-0000-000000000108",
+                variadic: false
+              }
+            ],
+            named_args: %{},
+            preserves_optionality: false,
+            return_type_id: "00000000-0000-0000-0000-000000000108",
+            return_typemod: nil
+          }
+        ])
 
-        EdgeDB.QB.Syntax.Path.to_expression(%{
-          __kind__: :function,
-          __element__: return_type,
-          __cardinality__: cardinality,
-          __name__: "math::floor",
-          __args__: positional,
-          __named_args__: named_args
-        })
-      end
-    ],
-    [
-      [
-        (
-          @doc "Return the base 10 logarithm of the input value."
-          def(lg(x)) do
-            execute_lg([x])
-          end
-        )
-      ],
-      [
-        (
-          @doc "Return the base 10 logarithm of the input value."
-          def(lg(x)) do
-            execute_lg([x])
-          end
-        )
-      ],
-      defp(execute_lg(positional \\ [], named \\ [])) do
-        {return_type, cardinality, args, named_args} =
-          EdgeDB.QB.Syntax.Funcops.resolve_overload(:lg, positional, named, [
-            %{
-              args: [
-                %{
-                  type_id: "00000000-0000-0000-0000-0000000001ff",
-                  optional: false,
-                  set_of_type: false,
-                  variadic: false
-                }
-              ],
-              named_args: %{},
-              return_type_id: "00000000-0000-0000-0000-0000000001ff",
-              return_typemod: nil,
-              preserves_optionality: false
-            }
-          ])
+      EdgeDB.QB.Syntax.Path.to_expression(%{
+        __kind__: :function,
+        __element__: return_type,
+        __cardinality__: cardinality,
+        __name__: :floor,
+        __args__: args,
+        __named_args__: named_args
+      })
+    end,
+    def(lg(args \\ [])) do
+      %{return_type: return_type, cardinality: cardinality, args: args, named_args: named_args} =
+        EdgeDB.QB.Syntax.Funcops.resolve_overload("math::lg", args, [
+          %{
+            args: [
+              %{
+                optional: false,
+                set_of_type: false,
+                type_id: "00000000-0000-0000-0000-0000000001ff",
+                variadic: false
+              }
+            ],
+            named_args: %{},
+            preserves_optionality: false,
+            return_type_id: "00000000-0000-0000-0000-0000000001ff",
+            return_typemod: nil
+          },
+          %{
+            args: [
+              %{
+                optional: false,
+                set_of_type: false,
+                type_id: "00000000-0000-0000-0000-000000000108",
+                variadic: false
+              }
+            ],
+            named_args: %{},
+            preserves_optionality: false,
+            return_type_id: "00000000-0000-0000-0000-000000000108",
+            return_typemod: nil
+          }
+        ])
 
-        EdgeDB.QB.Syntax.Path.to_expression(%{
-          __kind__: :function,
-          __element__: return_type,
-          __cardinality__: cardinality,
-          __name__: "math::lg",
-          __args__: positional,
-          __named_args__: named_args
-        })
-      end
-    ],
-    [
-      [
-        (
-          @doc "Return the logarithm of the input value in the specified *base*."
-          def(log(x, edgedb_elixir_named_arguments \\ [])) do
-            execute_log([[x], edgedb_elixir_named_arguments])
-          end
-        )
-      ],
-      defp(execute_log(positional \\ [], named \\ [])) do
-        {return_type, cardinality, args, named_args} =
-          EdgeDB.QB.Syntax.Funcops.resolve_overload(:log, positional, named, [
-            %{
-              args: [
-                %{
-                  type_id: "00000000-0000-0000-0000-000000000108",
-                  optional: false,
-                  set_of_type: false,
-                  variadic: false
-                }
-              ],
-              named_args: %{
-                "base" =>
-                  {:%{}, [],
-                   [
-                     type_id: "00000000-0000-0000-0000-000000000108",
-                     optional: false,
-                     set_of_type: false,
-                     variadic: false
-                   ]}
-              },
-              return_type_id: "00000000-0000-0000-0000-000000000108",
-              return_typemod: nil,
-              preserves_optionality: false
-            }
-          ])
+      EdgeDB.QB.Syntax.Path.to_expression(%{
+        __kind__: :function,
+        __element__: return_type,
+        __cardinality__: cardinality,
+        __name__: :lg,
+        __args__: args,
+        __named_args__: named_args
+      })
+    end,
+    def(log(args \\ [])) do
+      %{return_type: return_type, cardinality: cardinality, args: args, named_args: named_args} =
+        EdgeDB.QB.Syntax.Funcops.resolve_overload("math::log", args, [
+          %{
+            args: [
+              %{
+                optional: false,
+                set_of_type: false,
+                type_id: "00000000-0000-0000-0000-000000000108",
+                variadic: false
+              }
+            ],
+            named_args: %{
+              "base" => %{
+                optional: false,
+                set_of_type: false,
+                type_id: "00000000-0000-0000-0000-000000000108",
+                variadic: false
+              }
+            },
+            preserves_optionality: false,
+            return_type_id: "00000000-0000-0000-0000-000000000108",
+            return_typemod: nil
+          }
+        ])
 
-        EdgeDB.QB.Syntax.Path.to_expression(%{
-          __kind__: :function,
-          __element__: return_type,
-          __cardinality__: cardinality,
-          __name__: "math::log",
-          __args__: positional,
-          __named_args__: named_args
-        })
-      end
-    ]
+      EdgeDB.QB.Syntax.Path.to_expression(%{
+        __kind__: :function,
+        __element__: return_type,
+        __cardinality__: cardinality,
+        __name__: :log,
+        __args__: args,
+        __named_args__: named_args
+      })
+    end
   ]
 end

@@ -13,9 +13,6 @@ defmodule EdgeDB.QB.Generation.Module do
       code
       |> prepare(name)
       |> Macro.to_string()
-      |> tap(fn code ->
-        IO.puts(code)
-      end)
       |> Code.format_string!()
 
     filename

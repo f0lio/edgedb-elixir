@@ -3,9 +3,19 @@ defmodule(QB.EdgeDB.QB.CastMaps) do
     (
       @implicit_cast_map %{"std::bigint" => ["std::decimal"]}
       [
-        def(get_shared_parent_scalar(%{__casttype__: a}, %{__casttype__: b})) do
-          get_shared_parent_scalar(a, b)
-        end,
+        (
+          def(get_shared_parent_scalar(%{__casttype__: a}, %{__casttype__: b})) do
+            get_shared_parent_scalar(a, b)
+          end
+
+          def(get_shared_parent_scalar(%{__casttype__: a}, b)) do
+            get_shared_parent_scalar(a, b)
+          end
+
+          def(get_shared_parent_scalar(a, %{__casttype__: b})) do
+            get_shared_parent_scalar(a, b)
+          end
+        ),
         [
           def(
             get_shared_parent_scalar(

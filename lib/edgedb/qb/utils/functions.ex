@@ -34,7 +34,6 @@ defmodule EdgeDB.QB.Utils.Functions do
         params: group_params(func_def.params, types)
       })
     end)
-    |> IO.inspect()
   end
 
   def sort_funcop_anytype_overloads(overloads, type_specificities) do
@@ -137,7 +136,6 @@ defmodule EdgeDB.QB.Utils.Functions do
       end)
       |> Enum.map(fn param ->
         param_type = types[param.type.id]
-        IO.inspect({param, param_type})
 
         param_type =
           if param.kind == "VariadicParam" do

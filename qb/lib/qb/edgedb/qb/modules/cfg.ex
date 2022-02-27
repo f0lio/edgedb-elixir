@@ -20,53 +20,39 @@ defmodule(QB.EdgeDB.QB.Modules.Cfg) do
         end
       )
     ),
-    [
-      [
-        (
-          @doc ""
-          def(get_config_json(edgedb_elixir_named_arguments \\ [])) do
-            execute_get_config_json([[], edgedb_elixir_named_arguments])
-          end
-        )
-      ],
-      defp(execute_get_config_json(positional \\ [], named \\ [])) do
-        {return_type, cardinality, args, named_args} =
-          EdgeDB.QB.Syntax.Funcops.resolve_overload(:get_config_json, positional, named, [
-            %{
-              args: [],
-              named_args: %{
-                "max_source" =>
-                  {:%{}, [],
-                   [
-                     type_id: "00000000-0000-0000-0000-000000000101",
-                     optional: true,
-                     set_of_type: false,
-                     variadic: false
-                   ]},
-                "sources" =>
-                  {:%{}, [],
-                   [
-                     type_id: "05f91774-15ea-9001-038e-092c1cad80af",
-                     optional: true,
-                     set_of_type: false,
-                     variadic: false
-                   ]}
+    def(get_config_json(args \\ [])) do
+      %{return_type: return_type, cardinality: cardinality, args: args, named_args: named_args} =
+        EdgeDB.QB.Syntax.Funcops.resolve_overload("cfg::get_config_json", args, [
+          %{
+            args: [],
+            named_args: %{
+              "max_source" => %{
+                optional: true,
+                set_of_type: false,
+                type_id: "00000000-0000-0000-0000-000000000101",
+                variadic: false
               },
-              return_type_id: "00000000-0000-0000-0000-00000000010f",
-              return_typemod: nil,
-              preserves_optionality: false
-            }
-          ])
+              "sources" => %{
+                optional: true,
+                set_of_type: false,
+                type_id: "05f91774-15ea-9001-038e-092c1cad80af",
+                variadic: false
+              }
+            },
+            preserves_optionality: false,
+            return_type_id: "00000000-0000-0000-0000-00000000010f",
+            return_typemod: nil
+          }
+        ])
 
-        EdgeDB.QB.Syntax.Path.to_expression(%{
-          __kind__: :function,
-          __element__: return_type,
-          __cardinality__: cardinality,
-          __name__: "cfg::get_config_json",
-          __args__: positional,
-          __named_args__: named_args
-        })
-      end
-    ]
+      EdgeDB.QB.Syntax.Path.to_expression(%{
+        __kind__: :function,
+        __element__: return_type,
+        __cardinality__: cardinality,
+        __name__: :get_config_json,
+        __args__: args,
+        __named_args__: named_args
+      })
+    end
   ]
 end

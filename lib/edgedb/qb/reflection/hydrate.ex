@@ -52,11 +52,11 @@ defmodule EdgeDB.QB.Reflection.Hydrate do
       type = generated(Types).types()[id]
       obj = %{__name__: type.name}
 
-      case type.kind do
-        "anytype" ->
+      cond do
+        type.name == "anytype" ->
           anytype || raise RuntimeError, "anytype not provided"
 
-        "object" ->
+        type.kind == "object" ->
           obj = Map.put(obj, :__kind__, :object)
           pointers = %{}
           seen = MapSet.new()
@@ -74,7 +74,7 @@ defmodule EdgeDB.QB.Reflection.Hydrate do
           Caches.set(:type_cache, id, obj)
           obj
 
-        "scalar" ->
+        type.kind == "scalar" ->
           obj =
             if type[:cast_only_type] do
               Map.put(obj, :__casttype__, make_type(type.cast_only_type, literal_fn))
@@ -105,11 +105,11 @@ defmodule EdgeDB.QB.Reflection.Hydrate do
           Caches.set(:type_cache, id, obj)
           obj
 
-        "array" ->
+        type.kind == "array" ->
           element = make_type(type.array_element_id, literal_fn, anytype)
           Map.merge(obj, %{__element__: element, __name__: "array<#{element.__name__}>"})
 
-        "tuple" ->
+        type.kind == "tuple" ->
           if Enum.at(type.tuple_elements, 0).name == "0" do
             items =
               Enum.map(type.tuple_elements, fn element ->
@@ -144,7 +144,7 @@ defmodule EdgeDB.QB.Reflection.Hydrate do
             })
           end
 
-        _other ->
+        true ->
           raise RuntimeError, "invalid type: #{inspect(type.kind)}"
       end
     end
@@ -212,7 +212,6 @@ defmodule EdgeDB.QB.Reflection.Hydrate do
   end
 
   defp get_all_ancestors(id, [anc | ancestors], processed) do
-    IO.inspect({anc, ancestors})
     anc_type = generated(Types).types()[anc.id]
 
     if anc_type.kind != "object" do

@@ -47,6 +47,20 @@ defmodule EdgeDB.QB.Utils.Cardinality do
     cardinality2
   end
 
+  def multiply_cardinalities_variadic([]) do
+    raise RuntimeError, "empty list not allowed"
+  end
+
+  def multiply_cardinalities_variadic([cardinality]) do
+    cardinality
+  end
+
+  def multiply_cardinalities_variadic(cardinalities) do
+    Enum.reduce(cardinalities, :one, fn cardinality, result ->
+      multiply_cardinalities(result, cardinality)
+    end)
+  end
+
   def override_upper_bound(cardinality, cardinality_to_override)
       when cardinality in @cardinalities and cardinality_to_override in [:one, :many] do
     case cardinality_to_override do
@@ -146,5 +160,53 @@ defmodule EdgeDB.QB.Utils.Cardinality do
 
   def convert_cardinality("Empty") do
     :empty
+  end
+
+  def or_cardinalities(card1, card2) when card1 == card2 do
+    card1
+  end
+
+  def or_cardinalities(:many, _card) do
+    :many
+  end
+
+  def or_cardinalities(:at_least_one, :one) do
+    :at_least_one
+  end
+
+  def or_cardinalities(:at_least_one, _card) do
+    :many
+  end
+
+  def or_cardinalities(:at_most_one, :many) do
+    :many
+  end
+
+  def or_cardinalities(:at_most_one, :at_least_one) do
+    :many
+  end
+
+  def or_cardinalities(:at_most_one, _card) do
+    :at_most_one
+  end
+
+  def or_cardinalities(:empty, :at_most_one) do
+    :at_most_one
+  end
+
+  def or_cardinalities(:empty, :one) do
+    :at_most_one
+  end
+
+  def or_cardinalities(:empty, _card) do
+    :many
+  end
+
+  def or_cardinalities(_card, :empty) do
+    :at_most_one
+  end
+
+  def or_cardinalities(_card1, card2) do
+    card2
   end
 end

@@ -72,7 +72,7 @@ defmodule EdgeDB.QB.Generation do
       Generators.ScalarsGenerator.generate(generation_params),
       Generators.ObjectTypeGenerator.generate(generation_params),
       Generators.FunctionsGenerator.generate(generation_params),
-      mock(:generate_operators),
+      Generators.OperatorTypesGenerator.generate(generation_params),
       Generators.SetFnGenerator.generate(generation_params)
     ]
     |> List.flatten()

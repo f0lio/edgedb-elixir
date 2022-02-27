@@ -123,6 +123,14 @@ defmodule EdgeDB.QB.Generation.Generators.CastMapsGenerator do
         def get_shared_parent_scalar(%{__casttype__: a}, %{__casttype__: b}) do
           get_shared_parent_scalar(a, b)
         end
+
+        def get_shared_parent_scalar(%{__casttype__: a}, b) do
+          get_shared_parent_scalar(a, b)
+        end
+
+        def get_shared_parent_scalar(a, %{__casttype__: b}) do
+          get_shared_parent_scalar(a, b)
+        end
       end
 
     last_fn =
